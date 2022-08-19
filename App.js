@@ -10,14 +10,18 @@ import Iphone from "./components/Apple/Iphone/Iphone";
 import ProductSearch from "./components/Search/ProductSearch";
 import Login from "./components/Profile/Login";
 import SingUp from "./components/Profile/SingUp";
+import Settings from "./components/Profile/Settings";
+import Lang from "./components/Profile/Lang";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Icon } from "@rneui/themed";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { ScrollView } from "react-native";
 import { AuthContextProvider } from "./context/AuthContext";
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import "./Languages";
+import { useTranslation } from "react-i18next";
+import { I18nManager } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -66,11 +70,23 @@ const ProfileStack = () => {
         component={SingUp}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Lang"
+        component={Lang}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
 
 export default function App() {
+  const { t } = useTranslation();
+  
   return (
     <AuthContextProvider>
       <NavigationContainer>
@@ -90,7 +106,7 @@ export default function App() {
           }}
         >
           <Tab.Screen
-            name="Home"
+            name={t("home")}
             component={HomeStack}
             options={{
               tabBarIcon: ({ size, color }) => (
@@ -99,7 +115,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Categories"
+            name={t("categories")}
             component={Categories}
             options={{
               tabBarIcon: ({ size, color }) => (
@@ -108,7 +124,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Cart"
+            name={t("cart")}
             component={Cart}
             options={{
               tabBarIcon: ({ size, color }) => (
@@ -117,7 +133,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Search"
+            name={t("search")}
             component={SearchStack}
             options={{
               tabBarIcon: ({ size, color }) => (
@@ -127,7 +143,7 @@ export default function App() {
             }}
           />
           <Tab.Screen
-            name="Profile"
+            name={t("profile")}
             component={ProfileStack}
             options={({ route }) => ({
               tabBarIcon: ({ size, color }) => (
@@ -153,8 +169,8 @@ export default function App() {
 }
 
 const tabBarVisibility = (route) => {
-  const routeName = getFocusedRouteNameFromRoute(route) 
+  const routeName = getFocusedRouteNameFromRoute(route);
   if (routeName === "Login" || routeName === "SingUp") {
-    return "none"
+    return "none";
   }
 };

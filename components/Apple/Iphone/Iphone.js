@@ -28,7 +28,7 @@ const Iphone = ({navigation}) => {
     let q = query(
       iphoneRef,
       where("categoryName", "==", "Mobile Phones"),
-      where("brandName", "==", "apple")
+      where("brandName", "==", "Apple")
     );
     const getPhones = async () => {
       const mobiles = await getDocs(q);

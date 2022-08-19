@@ -1,10 +1,12 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native-elements";
 import { color } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const Header = ({ navigation }) => {
+  const {t} = useTranslation()
   return (
     <View style={styles.container}>
       <Image
@@ -25,7 +27,7 @@ const Header = ({ navigation }) => {
               size={14}
             />
           }
-          title="Categories"
+          title={t("categories")}
           iconRight
           color="#fec525"
           accessibilityLabel="go to Categories"
@@ -43,7 +45,7 @@ const Header = ({ navigation }) => {
               size={14}
             />
           }
-          title="Search"
+          title={t("search")}
           color="#fec525"
           accessibilityLabel="go to Search"
           iconRight

@@ -12,6 +12,7 @@ import {
   Platform,
   TouchableOpacity,
   Linking,
+  
 } from "react-native";
 import { Button, Card } from "react-native-elements";
 import { color } from "react-native-reanimated";
@@ -24,6 +25,8 @@ import Slider from "./Slider/Slider";
 import db from "../../firebase";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import ShowCategories from "./ShowCategories/ShowCategories";
+import { useTranslation } from "react-i18next";
+import { I18nManager } from "react-native";
 const Home = ({ navigation }) => {
   const { width, height } = Dimensions.get("screen");
   const ITEM_WIDTH = width * 0.76;
@@ -34,6 +37,14 @@ const Home = ({ navigation }) => {
   const [laptops, setLaptops] = useState([]);
   const [tablets, setTablets] = useState([]);
   const [televisions, setTelevisions] = useState([]);
+
+  console.log(I18nManager.isRTL);
+   const {i18n} =  useTranslation()
+   if (i18n.language ===  "ar") {
+    I18nManager.forceRTL(true)
+   } else if (i18n.language ===  "en") {
+    I18nManager.forceRTL(false)
+   }
   useEffect(() => {
     const proCollection = collection(db, "Products");
 
@@ -85,7 +96,7 @@ const Home = ({ navigation }) => {
       );
     });
   }, []);
-  console.log(phonesAndPersonalAudio);
+
   return (
     <ScrollView>
       <View>

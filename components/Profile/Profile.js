@@ -79,6 +79,7 @@ const Profile = ({ navigation }) => {
               name={"settings"}
               color="#ddd"
               size={30}
+              onPress={()=> {navigation.navigate("Settings")}}
             />
           </View>
         </View>
