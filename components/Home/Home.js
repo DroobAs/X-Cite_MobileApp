@@ -12,7 +12,6 @@ import {
   Platform,
   TouchableOpacity,
   Linking,
-  
 } from "react-native";
 import { Button, Card } from "react-native-elements";
 import { color } from "react-native-reanimated";
@@ -27,6 +26,7 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import ShowCategories from "./ShowCategories/ShowCategories";
 import { useTranslation } from "react-i18next";
 import { I18nManager } from "react-native";
+
 const Home = ({ navigation }) => {
   const { width, height } = Dimensions.get("screen");
   const ITEM_WIDTH = width * 0.76;

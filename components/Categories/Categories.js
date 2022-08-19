@@ -1,8 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 const Categories = () => {
   return (
-    <Text>Categories</Text>
+    <View>
+      <Text>Categories</Text>
+    </View>
   )
 }
 

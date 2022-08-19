@@ -70,7 +70,7 @@ const SingUp = ({ navigation }) => {
             try {
               await createUser(values.email, values.password).then((res) => {
                 const userCollection = doc(db, `users/${res.user.uid}`);
-                setDoc(userCollection, {...values, mob : "from mobile app"}).then(() => {
+                setDoc(userCollection, {...values, orders:[], cart:[], wishlist:[], mob : "from mobile app"}).then(() => {
                  
                   console.log("done");
                 });
