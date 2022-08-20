@@ -9,17 +9,18 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-
+import {AddToUserCart} from '../../Cart/cartService'
 import { Card } from "@rneui/themed";
 import { Button } from "@rneui/themed";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import db from "../../../firebase";
 // import { Icon } from "react-native-elements/dist/icons/Icon";
 import { Icon } from "@rneui/themed";
 import { AntDesign } from "@expo/vector-icons";
+import { UserAuth } from "../../../context/AuthContext";
 const Iphone = ({navigation}) => {
   const { width, height } = Dimensions.get("screen");
-
+   const {user} = UserAuth()
   const [data, setData] = useState([]);
 
   // get data iphone from firestore
@@ -151,7 +152,7 @@ const Iphone = ({navigation}) => {
             backgroundColor: "orange",
           }}
           onPress={() => {
-            navigation.navigate(item.comp);
+            AddToUserCart(item.id, 1,user, db, doc, getDoc, updateDoc);
           }}
           color="orange"
         />

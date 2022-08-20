@@ -2,21 +2,23 @@ import {
   collection,
   getDocs,
   onSnapshot,
-  orderBy,
-  query,
-  where,
+  updateDoc,
+  getDoc,
+  doc
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
 import { Card, Button, Icon } from "@rneui/themed";
-
+import  {AddToUserCart} from "../Cart/cartService"
 import db from "../../firebase";
 import { AntDesign } from "@expo/vector-icons";
+import { UserAuth } from "../../context/AuthContext";
 
 const ProductSearch = ({ navigation, route }) => {
   const [dataSearch, setDataSearch] = useState([]);
   const [result, setResult] = useState([]);
   const [showingData, setShowingData] = useState([]);
+  const {user} = UserAuth()
   let inputValue = route.params.name;
   console.log(inputValue);
   useEffect(() => {
@@ -135,6 +137,7 @@ const ProductSearch = ({ navigation, route }) => {
                     }}
                     color="warning"
                     iconRight
+                    onPress={()=>{AddToUserCart(item.id, 1,user, db, doc, getDoc, updateDoc)}}
                   >
                     Add to cart <Icon name="shopping-cart" color="white" />
                   </Button>
